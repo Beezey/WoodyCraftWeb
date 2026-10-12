@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Computer;
 
 class computerController extends Controller
@@ -21,7 +22,8 @@ class computerController extends Controller
      */
     public function create()
     {
-        return view('computers.create');
+        $categories = Category::orderBy('name')->get();
+        return view('computers.create', compact('categories'));
     }
 
     /**
@@ -31,7 +33,7 @@ class computerController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'price'       => 'required|numeric|min:0',
@@ -60,7 +62,8 @@ class computerController extends Controller
      */
     public function edit(Computer $computer)
     {
-        return view('computers.edit', compact('computer'));
+        $categories = Category::orderBy('name')->get();
+        return view('computers.edit', compact('computer', 'categories'));
     }   
 
     /**
@@ -70,7 +73,7 @@ class computerController extends Controller
     {
         $rules = [
             'name'        => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
             'price'       => 'required|numeric|min:0',
         ];

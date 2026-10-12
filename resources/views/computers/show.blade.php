@@ -21,7 +21,7 @@
             <p>{{ $computer->name }}</p>
 
             <h3 class="font-semibold text-xl text-gray-800 pt-2">@lang('Catégorie')</h3>
-            <p>{{ $computer->category }}</p>
+            <p>{{ $computer->category->name }}</p>
 
             <h3 class="font-semibold text-xl text-gray-800 pt-2">@lang('Description')</h3>
             <p>{{ $computer->description }}</p>
