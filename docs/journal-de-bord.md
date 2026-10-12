@@ -137,7 +137,7 @@ Travail demandé par la professeure pour cette journée en distanciel :
 
 - Structure, clés étrangères et index des 7 tables relus en base : conformes aux deux cartes.
 - Captures phpMyAdmin de la carte #3 ajoutées dans `docs/captures/carte-3/` (structure des 6 tables, clés étrangères), avec le commentaire de la carte.
-- Un commit par carte, poussés sur `main`.
+- Un commit par carte, poussés sur `main`, ainsi que la carte #6, `CLAUDE.md` et l'outil de captures `tools/captures-pma.mjs`.
 
 ### État en fin de séance
 
@@ -145,7 +145,7 @@ Travail demandé par la professeure pour cette journée en distanciel :
 |---|---|
 | Carte #3 (tables) | Poussée, à vérifier puis clôturer |
 | Carte #4 (table `computers`) | Poussée, à vérifier puis clôturer |
-| Carte #6 (données de démonstration) | Terminée en local, à commiter et pousser |
+| Carte #6 (données de démonstration) | Poussée, à vérifier puis clôturer |
 
 ### Outils utilisés
 
