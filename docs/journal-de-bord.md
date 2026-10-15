@@ -165,6 +165,14 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - La vue `home` affiche pour l'instant une simple liste des noms ; la mise en page de la maquette (cartes et liens) est le travail de la carte #25.
 - Vérifié par une vraie requête HTTP sur `/` (code 200) : les 6 catégories de la base apparaissent sur la page.
 
+**Carte #9 — US02 back : ordinateurs d'une catégorie**
+
+- Route publique `/categories/{category}` nommée `categories.show`, qui appelle `CategoryController@show`.
+- Le contrôleur ne récupère que les ordinateurs de la catégorie demandée (`$category->computers()`), triés par nom, et les transmet à la vue `categories.show`.
+- Une catégorie inexistante renvoie une erreur 404 grâce à la liaison de modèle de la route (route model binding).
+- La vue affiche une simple liste (nom et prix) ; la mise en page de la maquette est le travail de la carte #26.
+- Vérifié en HTTP : `/categories/5` (Portables) renvoie les 8 portables, `/categories/3` (Tuff) son seul ordinateur, `/categories/999` une erreur 404. Les nombres correspondent à la base.
+
 ### Choix de conception
 
 | Choix | Raison |
@@ -174,6 +182,7 @@ Travail demandé par la professeure pour cette journée en distanciel :
 | Le sélecteur FR / EN de la maquette n'est pas encore ajouté | Il relève de la carte #37 (version multilingue) |
 | La page d'accueil est publique | Le sujet permet à un visiteur de parcourir le catalogue sans être connecté |
 | Catégories triées par nom | Ordre stable et facile à parcourir pour le visiteur |
+| Erreur 404 par la liaison de modèle (`Category $category`) | Laravel renvoie lui-même la 404 si l'id n'existe pas : pas de test à écrire à la main |
 
 ### Difficultés rencontrées
 
@@ -187,6 +196,7 @@ Travail demandé par la professeure pour cette journée en distanciel :
 |---|---|
 | Carte #7 (mise en page) | Poussée, à vérifier puis clôturer |
 | Carte #8 (US01 back) | Commitée, à pousser, vérifier puis clôturer |
+| Carte #9 (US02 back) | Commitée, à pousser, vérifier puis clôturer |
 
 ### Outils utilisés
 
