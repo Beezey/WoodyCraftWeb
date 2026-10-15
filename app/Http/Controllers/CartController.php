@@ -56,6 +56,19 @@ class CartController extends Controller
     }
 
     /**
+     * Supprime une ligne du panier.
+     */
+    public function destroy(CartItem $item)
+    {
+        $this->checkOwner($item);
+
+        $item->delete();
+
+        return redirect()->route('cart.index')
+            ->with('message', 'Ordinateur retiré du panier.');
+    }
+
+    /**
      * Refuse l'accès à une ligne qui n'est pas dans le panier du visiteur.
      */
     private function checkOwner(CartItem $item): void

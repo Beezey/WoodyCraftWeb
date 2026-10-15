@@ -195,6 +195,12 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - Route `GET /cart` nommée `cart.index`, avec une vue simple (tableau des lignes et total) ; la mise en page est le travail de la carte #29. Le lien « Panier » de l'en-tête y mène désormais.
 - Vérifié en HTTP : quantité passée de 2 à 4, valeurs `0`, `abc`, `2.5` et vide refusées avec un message en français, totaux identiques à ceux calculés en SQL.
 
+**Carte #13 — US06 back : suppression d'un produit du panier**
+
+- Route `DELETE /cart/items/{item}` nommée `cart.destroy` (`CartController@destroy`).
+- Même vérification que pour la quantité (méthode privée `checkOwner`) : 403 si la ligne n'est pas dans le panier du visiteur.
+- Vérifié en HTTP : la ligne de son propre panier est supprimée ; celle du panier d'un autre utilisateur renvoie 403 et reste en base.
+
 ### Choix de conception
 
 | Choix | Raison |
