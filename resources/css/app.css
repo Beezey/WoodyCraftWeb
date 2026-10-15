@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Titres en Fraunces, comme dans la maquette */
+@layer base {
+    h1, h2, h3 {
+        @apply font-serif text-bark;
+    }
+}
