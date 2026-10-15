@@ -180,6 +180,13 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - Le contrôleur charge la catégorie avec l'ordinateur (`$computer->load('category')`).
 - Vérifié en HTTP sans connexion : `/computers/16` → 200, `/computers/99999` → 404, `/computers` et `/computers/create` → redirection vers la connexion.
 
+**Carte #11 — US04 back : ajout au panier**
+
+- Route publique `POST /cart/{computer}` nommée `cart.add`, qui appelle `CartController@add`.
+- Deux méthodes dans le modèle `Cart` : `current()` retrouve le panier du visiteur (par `user_id` s'il est connecté, par `session_id` sinon) et `currentOrCreate()` le crée s'il n'existe pas. Le compteur de l'en-tête (`AppServiceProvider`) utilise maintenant `current()`.
+- Si l'ordinateur est déjà dans le panier, sa ligne passe à la quantité suivante ; sinon une ligne est créée avec la quantité 1.
+- Vérifié en HTTP en visiteur (cookie de session et jeton CSRF) : deux ajouts du même ordinateur donnent une ligne en quantité 2. Cas connecté vérifié dans tinker (panier créé avec `user_id`).
+
 ### Choix de conception
 
 | Choix | Raison |

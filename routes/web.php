@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -19,6 +20,9 @@ use App\Http\Controllers\computerController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+
+// Panier : accessible sans connexion (panier rattaché à la session du visiteur)
+Route::post('/cart/{computer}', [CartController::class, 'add'])->name('cart.add');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
