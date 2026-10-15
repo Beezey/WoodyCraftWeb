@@ -22,7 +22,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Panier : accessible sans connexion (panier rattaché à la session du visiteur)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{computer}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('/cart/items/{item}', [CartController::class, 'update'])->name('cart.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

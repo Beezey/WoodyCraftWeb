@@ -27,4 +27,12 @@ class CartItem extends Model
     {
         return $this->belongsTo(Computer::class);
     }
+
+    /**
+     * Total de la ligne : prix de l'ordinateur multiplié par la quantité.
+     */
+    public function total(): float
+    {
+        return round($this->computer->price * $this->quantity, 2);
+    }
 }

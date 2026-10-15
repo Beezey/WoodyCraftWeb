@@ -187,6 +187,14 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - Si l'ordinateur est déjà dans le panier, sa ligne passe à la quantité suivante ; sinon une ligne est créée avec la quantité 1.
 - Vérifié en HTTP en visiteur (cookie de session et jeton CSRF) : deux ajouts du même ordinateur donnent une ligne en quantité 2. Cas connecté vérifié dans tinker (panier créé avec `user_id`).
 
+**Carte #12 — US05 back : quantité d'un produit du panier**
+
+- Route `PATCH /cart/items/{item}` nommée `cart.update` (`CartController@update`), avec la validation `required|integer|min:1`.
+- Le contrôleur refuse (403) une ligne qui n'est pas dans le panier du visiteur.
+- Totaux calculés dans les modèles : `CartItem::total()` et `Cart::total()`.
+- Route `GET /cart` nommée `cart.index`, avec une vue simple (tableau des lignes et total) ; la mise en page est le travail de la carte #29. Le lien « Panier » de l'en-tête y mène désormais.
+- Vérifié en HTTP : quantité passée de 2 à 4, valeurs `0`, `abc`, `2.5` et vide refusées avec un message en français, totaux identiques à ceux calculés en SQL.
+
 ### Choix de conception
 
 | Choix | Raison |

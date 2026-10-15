@@ -28,6 +28,14 @@ class Cart extends Model
     }
 
     /**
+     * Total du panier : somme des totaux de ses lignes.
+     */
+    public function total(): float
+    {
+        return round($this->items->sum(fn (CartItem $item) => $item->total()), 2);
+    }
+
+    /**
      * Panier du visiteur courant : par user_id s'il est connecté, par session_id sinon.
      */
     public static function current(): ?self
