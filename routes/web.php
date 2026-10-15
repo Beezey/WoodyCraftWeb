@@ -35,6 +35,9 @@ Route::post('/computers/{computer}/duplicate', [computerController::class, 'dupl
     ->name('computers.duplicate')
     ->middleware('auth');
 
-Route::resource('computers', computerController::class)->middleware('auth');
+Route::resource('computers', computerController::class)->except('show')->middleware('auth');
+
+// Page d'un ordinateur : accessible sans connexion (déclarée après /computers/create)
+Route::get('/computers/{computer}', [computerController::class, 'show'])->name('computers.show');
 
 require __DIR__.'/auth.php';

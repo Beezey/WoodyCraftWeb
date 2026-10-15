@@ -54,6 +54,8 @@ class computerController extends Controller
      */
     public function show(Computer $computer)
     {
+        // Page publique : l'ordinateur et sa catégorie
+        $computer->load('category');
         return view('computers.show', compact('computer'));
     }
 

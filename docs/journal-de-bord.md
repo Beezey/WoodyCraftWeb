@@ -173,6 +173,13 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - La vue affiche une simple liste (nom et prix) ; la mise en page de la maquette est le travail de la carte #26.
 - Vérifié en HTTP : `/categories/5` (Portables) renvoie les 8 portables, `/categories/3` (Tuff) son seul ordinateur, `/categories/999` une erreur 404. Les nombres correspondent à la base.
 
+**Carte #10 — US03 back : détail d'un ordinateur**
+
+- La route `computers.show` est retirée de la ressource protégée par `auth` (`->except('show')`) et déclarée à part, sans middleware : la page d'un ordinateur est publique.
+- Elle est déclarée après la ressource, sinon `/computers/create` serait pris pour l'ordinateur « create » et renverrait une 404.
+- Le contrôleur charge la catégorie avec l'ordinateur (`$computer->load('category')`).
+- Vérifié en HTTP sans connexion : `/computers/16` → 200, `/computers/99999` → 404, `/computers` et `/computers/create` → redirection vers la connexion.
+
 ### Choix de conception
 
 | Choix | Raison |
