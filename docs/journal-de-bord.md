@@ -158,6 +158,13 @@ Travail demandé par la professeure pour cette journée en distanciel :
 - Couleurs de la maquette ajoutées à Tailwind (`cream`, `pine`, `bark`), polices Fraunces (titres) et DM Sans (texte) chargées depuis fonts.bunny.net. Liens de navigation, bouton principal et champs de saisie repris aux couleurs de la maquette.
 - Nombre d'articles du panier : calculé dans `AppServiceProvider` (composeur de vue) en additionnant les quantités du panier du client connecté, ou du visiteur grâce à son identifiant de session.
 
+**Carte #8 — US01 back : catégories sur la page d'accueil**
+
+- Route `/` nommée `home`, qui appelle `HomeController@index` à la place de la page d'accueil par défaut de Laravel (`welcome`).
+- Le contrôleur récupère toutes les catégories, triées par nom, et les transmet à la nouvelle vue `home`.
+- La vue `home` affiche pour l'instant une simple liste des noms ; la mise en page de la maquette (cartes et liens) est le travail de la carte #25.
+- Vérifié par une vraie requête HTTP sur `/` (code 200) : les 6 catégories de la base apparaissent sur la page.
+
 ### Choix de conception
 
 | Choix | Raison |
@@ -165,17 +172,21 @@ Travail demandé par la professeure pour cette journée en distanciel :
 | Mode sombre de Tailwind passé en `class` | La maquette est en thème clair ; sans cela, un navigateur en mode sombre affichait des titres illisibles |
 | Le lien « Panier » pointe vers `cart.index` seulement si la route existe | La page du panier sera créée par les cartes #12 et #29 ; d'ici là le lien ne mène nulle part |
 | Le sélecteur FR / EN de la maquette n'est pas encore ajouté | Il relève de la carte #37 (version multilingue) |
+| La page d'accueil est publique | Le sujet permet à un visiteur de parcourir le catalogue sans être connecté |
+| Catégories triées par nom | Ordre stable et facile à parcourir pour le visiteur |
 
 ### Difficultés rencontrées
 
 - **Fichiers de la maquette.** Les pages HTML d'origine ne sont plus sur le poste : la mise en page a été reprise à partir de la charte notée dans ce journal (couleurs, polices).
 - **Preuve du compteur.** L'ajout au panier n'existe pas encore (carte #11) : pour la capture, un panier de 3 articles a été créé dans une transaction annulée juste après le rendu. La base n'a pas été modifiée (0 panier avant et après).
+- **Push depuis l'assistant.** Git ne peut pas demander l'identifiant GitHub dans la session de l'assistant : le push se fait depuis VS Code ou un terminal ouvert à la main.
 
 ### État en fin de séance
 
 | Élément | État |
 |---|---|
 | Carte #7 (mise en page) | Poussée, à vérifier puis clôturer |
+| Carte #8 (US01 back) | Commitée, à pousser, vérifier puis clôturer |
 
 ### Outils utilisés
 
