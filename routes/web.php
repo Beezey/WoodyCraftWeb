@@ -38,11 +38,13 @@ Route::middleware('auth')->group(function () {
     
 });
 
-Route::post('/computers/{computer}/duplicate', [computerController::class, 'duplicate'])
-    ->name('computers.duplicate')
-    ->middleware('auth');
+// Gestion des ordinateurs : réservée à l'administrateur
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::post('/computers/{computer}/duplicate', [computerController::class, 'duplicate'])
+        ->name('computers.duplicate');
 
-Route::resource('computers', computerController::class)->except('show')->middleware('auth');
+    Route::resource('computers', computerController::class)->except('show');
+});
 
 // Page d'un ordinateur : accessible sans connexion (déclarée après /computers/create)
 Route::get('/computers/{computer}', [computerController::class, 'show'])->name('computers.show');

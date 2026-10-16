@@ -226,6 +226,30 @@ Travail demandé par la professeure pour cette journée en distanciel :
 | Carte #8 (US01 back) | Commitée, à pousser, vérifier puis clôturer |
 | Carte #9 (US02 back) | Commitée, à pousser, vérifier puis clôturer |
 
+## Séance du 16 octobre 2026
+
+### Travail réalisé
+
+**Carte #5 — rôle administrateur**
+
+- Migration `2026_10_15_140000_add_is_admin_to_users_table` : colonne `is_admin` (booléen, `false` par défaut) ajoutée à `users`. Le compte existant reste un simple client.
+- Middleware `EnsureUserIsAdmin`, enregistré sous l'alias `admin` : il renvoie une erreur 403 si l'utilisateur connecté n'est pas administrateur.
+- Les routes de gestion des ordinateurs (liste, création, modification, suppression, duplication) sont regroupées sous `['auth', 'admin']`. La page d'un ordinateur (`computers.show`) reste publique.
+- `AdminSeeder` : compte de démonstration `admin@woodycraft.test` (mot de passe `password`), ajouté à `DatabaseSeeder`. Il peut être relancé sans créer de doublon et ne change pas le mot de passe d'un compte déjà créé.
+- Vérifié en exécutant les requêtes dans l'application : visiteur → redirection vers la connexion, client → 403, administrateur → 200 sur `/computers`, `/computers/create` et `/computers/{id}/edit` ; la page d'un ordinateur répond 200 pour les trois.
+
+### Choix de conception
+
+| Choix | Raison |
+|---|---|
+| Un booléen `is_admin` plutôt qu'une table des rôles | Le sujet ne prévoit que deux profils, client et administrateur |
+| `is_admin` n'est pas dans `$fillable` | Un utilisateur ne doit pas pouvoir se déclarer administrateur en ajoutant ce champ au formulaire d'inscription ou de profil |
+| Erreur 403 pour un client connecté | Il est bien identifié, mais n'a pas le droit : la redirection vers la connexion ne lui servirait à rien |
+
+### Reste à faire
+
+- Les liens « Créer » et « Computers » de l'en-tête et du pied de page s'affichent encore pour tous les utilisateurs, et mènent à une 403 pour un client. Les masquer relève de la partie front.
+
 ### Outils utilisés
 
 Laravel 10, MySQL, Laragon, VS Code, Figma et html.to.design, draw.io, GitHub (issues et projet), Claude Code (assistant IA).
